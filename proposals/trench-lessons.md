@@ -1,0 +1,21 @@
+# Trench Lessons
+- Type: API
+- Description: Solana meme coin research API for trading bots. Pay-per-request daily findings feed (pump.fun / PumpSwap / Meteora, with sources) and per-mint pre-trade risk flags (curveSkipPool, unlockedLp, mayhemMode, bundleHandoff, each with status and confidence). Research only, not financial advice.
+- Website (HTTPS): https://trench-lessons.vercel.app
+- Logo (HTTPS): https://trench-lessons.vercel.app/logo.png
+- Documentation: https://trench-lessons.vercel.app/api-docs (also https://trench-lessons.vercel.app/llms.txt, https://trench-lessons.vercel.app/openapi.json, https://trench-lessons.vercel.app/.well-known/x402)
+- Public repository: none published yet
+- Networks and chain identifiers: Solana mainnet, solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp
+- Paid resource URLs and HTTP methods:
+  - GET https://trench-lessons.vercel.app/api/signals/risk/{mint} - $0.01 (10000 atomic USDC)
+  - GET https://trench-lessons.vercel.app/api/lessons/feed?days=1..30 - $0.005 (5000 atomic USDC)
+- x402 version and payment scheme: x402 v2, exact (Bazaar extension on every 402)
+- Token contract or mint, decimals: USDC, EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v, 6 decimals
+- Seller payment recipient addresses: 7JAuWxcEpZL2wK3gm6eTR2p7d1SAofM4EHxuTgemAAae (USDC token account D4CwjiE8uu3SqJfAU9sBb1ogDyHJAmbxj4r4HiKAMN5j)
+- Facilitator URL and supported endpoint: PayAI (https://facilitator.payai.network)
+- Facilitator signer / relayer addresses (if applicable): not a facilitator. PayAI fee payer seen in settlements: CjNFTjvBhbJJd2B5ePPMHRLx1ELZpa8dwQgGL727eKww
+- Example successful settlement hashes and explorer links (self-test payments by the operator):
+  - 10000 atomic (risk endpoint), 2026-10-16 00:06:39 UTC: https://solscan.io/tx/2HusZoogZCpGN3FdPBndHvqT5czqsmNoxCzwibD1pk5yAKprEtvVaBYVKxDFLt8d2C9rRzVgcJQx1KBzQ5DKNHV2
+  - 5000 atomic (feed endpoint), 2026-10-16 00:43:37 UTC: https://solscan.io/tx/4o7wowURd1wKfurV7ukoV3hbmEpTkvGT4s3VgWaYRL8DbXkfGNHYTheCNxeX2SpqmeAusYfpKuFnj6nCKyCZ8Cj2
+- Ownership evidence: payTo 7JAuWxcEpZL2wK3gm6eTR2p7d1SAofM4EHxuTgemAAae is published on the domain at https://trench-lessons.vercel.app/.well-known/x402 and https://trench-lessons.vercel.app/api/pricing
+- Public support channel: https://x.com/ProfitzDigital
