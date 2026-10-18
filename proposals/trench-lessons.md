@@ -66,15 +66,49 @@ https://x.com/ProfitzDigital. Please include the transaction signature and UTC t
 
 ## Settlement evidence (Solana mainnet)
 
-All four payments to the payTo are **operator test payments**. They came from the operator's own test wallet `GB9E9Vk5cTwbUa5xbpvNGtHKUsii18qiub8ST41tna9W`, which was funded by the payTo at 2026-10-16 00:01:17 UTC. They are not customer activity. Each was checked on-chain via public RPC `getTransaction`: finalized, `err: null`, fee payer `CjNFTjvBhbJJd2B5ePPMHRLx1ELZpa8dwQgGL727eKww` (PayAI), and `TransferChecked` from `GYQJaLaVHxWoRH1tDgSjXnziMdX5hzT8TnN5G7nEoo6P` (test wallet's USDC account) to `D4CwjiE8uu3SqJfAU9sBb1ogDyHJAmbxj4r4HiKAMN5j`. Times are block times (UTC).
+End-to-end captures from **operator test payments** made on 2026-10-18 from the operator's test wallet `GB9E9Vk5cTwbUa5xbpvNGtHKUsii18qiub8ST41tna9W` (funded by the payTo in tx [5TCm1UN2…GYE4](https://solscan.io/tx/5TCm1UN2eASKW1kdNvbE8UFeb57JRCHg7f2jKCJrPzi1Zhu2efWEeAJs8BEeNWDsGb7L9hcQ1Fpk7UkZg4vHGYE4), 0.02 USDC). These are not customer activity. The client was `@x402/fetch` + `@x402/svm` `ExactSvmScheme`. Each transaction was checked via public RPC `getTransaction` at `finalized` commitment: `err: null`, fee payer `CjNFTjvBhbJJd2B5ePPMHRLx1ELZpa8dwQgGL727eKww` (PayAI), and a `TransferChecked` from `GYQJaLaVHxWoRH1tDgSjXnziMdX5hzT8TnN5G7nEoo6P` (test wallet USDC account) to `D4CwjiE8uu3SqJfAU9sBb1ogDyHJAmbxj4r4HiKAMN5j` (payTo USDC account).
 
-| # | Block time (UTC) | Slot | Amount | Inferred endpoint (by price) | Transaction |
+### A. Risk endpoint: operator test
+
+| Field | Value |
+|---|---|
+| Request | `GET https://trench-lessons.vercel.app/api/signals/risk/DFMt2FyLpB6ekPNAzVErLXgpSnJ9CRf1VnxBAkTLpump`, 2026-10-18 15:23:45 UTC |
+| Amount | 10000 atomic units (0.01 USDC) |
+| Response | `200`: `{"mint":"DFMt2FyLpB6ekPNAzVErLXgpSnJ9CRf1VnxBAkTLpump","mocked":false,"network":"solana-mainnet (read-only RPC)","flags":{"curveSkipPool":{"value":false,"status":"ok","confidence":"high","detail":{...}},"unlockedLp":{"value":false,"status":"ok","confidence":"high",...},"mayhemMode":{"value":false,"status":"ok","confidence":"high",...},"bundleHandoff":{"value":false,"status":"ok","confidence":"low",...}},"riskScore":0,"scoredFlags":4,"elapsedMs":226,"asOf":"2026-10-18T15:23:47.380Z","disclaimer":"Heuristic, read-only on-chain checks. ..."}` |
+| Settled by | PayAI, slot 458483425, block time 2026-10-18 15:23:47 UTC |
+| Transaction | https://solscan.io/tx/fkBM1NpeSXapntXDrJGWB657RZvM9v9ocykk2XTk9VDeJvGvpn5PprmLKUbrmc82SL2NoeCoPBCMAhSeu7hNrhD |
+
+Decoded `PAYMENT-RESPONSE`:
+```json
+{"success": true, "payer": "GB9E9Vk5cTwbUa5xbpvNGtHKUsii18qiub8ST41tna9W", "transaction": "fkBM1NpeSXapntXDrJGWB657RZvM9v9ocykk2XTk9VDeJvGvpn5PprmLKUbrmc82SL2NoeCoPBCMAhSeu7hNrhD", "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"}
+```
+
+### B. Feed endpoint: operator test
+
+| Field | Value |
+|---|---|
+| Request | `GET https://trench-lessons.vercel.app/api/lessons/feed?days=1`, 2026-10-18 15:23:50 UTC |
+| Amount | 5000 atomic units (0.005 USDC) |
+| Response | `200`: `{"generatedAt":"2026-10-18T15:23:52.360Z","count":1,"feed":[{"date":"2026-10-17","findings":[{"topic":"Bitquery, FOMO app (Oct 17): ...","evidence":"A dataset","points":[...]},{"topic":"pump.fun: new 0.45% platform fee on app and web trades from Oct 17",...},...],"sources":[...]}],"disclaimer":"Educational research only. ..."}` |
+| Settled by | PayAI, slot 458483446, block time 2026-10-18 15:23:52 UTC |
+| Transaction | https://solscan.io/tx/5dWbfEww4PosucPZrHh81FiEDU6uGxgU6NqWtEaWT1z49h1XjkUAv4RdbQQWnxbmtwKKmh3K7vgqtNMEfyGSUXCo |
+
+Decoded `PAYMENT-RESPONSE`:
+```json
+{"success": true, "payer": "GB9E9Vk5cTwbUa5xbpvNGtHKUsii18qiub8ST41tna9W", "transaction": "5dWbfEww4PosucPZrHh81FiEDU6uGxgU6NqWtEaWT1z49h1XjkUAv4RdbQQWnxbmtwKKmh3K7vgqtNMEfyGSUXCo", "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"}
+```
+
+Bodies are abbreviated with `...`; they contain only public research and on-chain data. The payer is the operator's own test wallet, so it is not redacted.
+
+## Earlier operator test payments (amount-only evidence)
+
+These four earlier payments came from the same test wallet, which the payTo funded at 2026-10-16 00:01:17 UTC. On-chain they match the newer captures: finalized, `err: null`, PayAI fee payer, `TransferChecked` into `D4CwjiE8uu3SqJfAU9sBb1ogDyHJAmbxj4r4HiKAMN5j`. Their response bodies and `PAYMENT-RESPONSE` headers were not retained, so they are evidence of amount and recipient only. The endpoint is inferred from the price.
+
+| # | Block time (UTC) | Slot | Amount | Inferred endpoint | Transaction |
 |---|---|---|---|---|---|
 | 1 | 2026-10-16 00:01:36 | 457429969 | 10000 (0.01 USDC) | risk | https://solscan.io/tx/5aiNR3XnUtd4JPVKA2n1CPj2UYBQFwBU4SdrDwcbcUu623K6KqDCVRNcAG8n3Bug4ZFA43h4dtbCa2T5w2AFaWcZ |
 | 2 | 2026-10-16 00:06:31 | 457431320 | 5000 (0.005 USDC) | feed | https://solscan.io/tx/5efqUhFgxa2KuvAxuvyg2zpQBfeTp8orSzPHvHsCKpqJ2dtAeZkBc7ro3rs95ajChYMiQwMV9QViN2WTU2JUJxW2 |
 | 3 | 2026-10-16 00:06:39 | 457431356 | 10000 (0.01 USDC) | risk | https://solscan.io/tx/2HusZoogZCpGN3FdPBndHvqT5czqsmNoxCzwibD1pk5yAKprEtvVaBYVKxDFLt8d2C9rRzVgcJQx1KBzQ5DKNHV2 |
 | 4 | 2026-10-16 00:43:37 | 457441636 | 5000 (0.005 USDC) | feed | https://solscan.io/tx/4o7wowURd1wKfurV7ukoV3hbmEpTkvGT4s3VgWaYRL8DbXkfGNHYTheCNxeX2SpqmeAusYfpKuFnj6nCKyCZ8Cj2 |
-
-**Delivery captures: not yet available.** The response bodies and `PAYMENT-RESPONSE` headers of these test calls were not saved, and the platform request logs no longer cover 2026-10-16. So we cannot honestly tie any of these transactions to a specific response, and none is claimed here. A fresh, clearly labelled operator test of each endpoint will be added to this section: the request URL/method/amount/UTC time, a redacted `200` body and the decoded `PAYMENT-RESPONSE`, tied to its explorer transaction.
 
 No keys, credentials or usable payment authorizations are included.
