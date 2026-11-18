@@ -1,0 +1,21 @@
+# MyTollBooth
+- Type: API
+- Description: 24 x402-paid agent services: compute, risk, scan, price, compliance, DeFi, AI, media. 99 endpoints. Dual-rail Base + Solana. $0.001-$0.50/call.
+- Website (HTTPS): https://6mickswagger9.github.io/mytollbooth-site/
+- Logo (HTTPS): https://6mickswagger9.github.io/mytollbooth-site/favicon.ico
+- Documentation: https://x402-api-production-bd43.up.railway.app/llms.txt
+- Public repository: https://github.com/6mickswagger9
+- Networks and chain identifiers: eip155:8453 (Base), solana:5eykt4UsFv8P8NJdTREpY1vzKvdp
+- Paid resource URLs and HTTP methods:
+  - GET https://x402-api-production-bd43.up.railway.app/price
+  - POST https://risk-api-production-af85.up.railway.app/score-tx
+  - GET https://scan-api-production-e73f.up.railway.app/scan
+  - GET https://compute-api-production-245d.up.railway.app/hash
+- x402 version and payment scheme: x402 v2, exact
+- Token contract or mint, decimals: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 (USDC, 6 decimals) / EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v (USDC, 6 decimals)
+- Seller payment recipient addresses: 0xb5093b19A6cf2e5135B212074521d1734ADad959 (Base) / GKbRLTJrYTUQzJp8AcoGjunRCMuSo392jea4W7e8G7iP (Solana)
+- Facilitator URL and supported endpoint: https://api.cdp.coinbase.com/platform/v2/x402
+- Facilitator signer / relayer addresses (if applicable): N/A (CDP managed)
+- Example successful settlement hashes and explorer links: 0x58bd86e88b (Base, Nov 15 2026)
+- Ownership evidence (domain-hosted proof or public project reference): https://x402-api-production-bd43.up.railway.app/.well-known/x402
+- Public support channel: support@mytollbooth.com
